@@ -21,19 +21,21 @@ const AppRouter = ({ refreshUser, isLoggedIn, userObj }) => {
               justifyContent: "center",
             }}
           >
-            <Route exact path="/">
-              <Home userObj={userObj} />
-            </Route>
-            <Route exact path="/profile">
-              <Profile userObj={userObj} refreshUser={refreshUser} />
-            </Route>
+            <React.Fragment>
+              <Route exact path="/">
+                <Home userObj={userObj} />
+              </Route>
+              <Route exact path="/profile">
+                <Profile userObj={userObj} refreshUser={refreshUser} />
+              </Route>
+            </React.Fragment>
           </div>
         ) : (
-          <>
+          <React.Fragment>
             <Route exact path="/">
               <Auth />
             </Route>
-          </>
+          </React.Fragment>
         )}
       </Switch>
     </Router>

@@ -8,10 +8,10 @@ const NweetFactory = ({ userObj }) => {
   const [nweet, setNweet] = useState("");
   const [attachment, setAttachment] = useState("");
   const onSubmit = async (event) => {
+    event.preventDefault();
     if (nweet === "") {
       return;
     }
-    event.preventDefault();
     let attachmentUrl = "";
     if (attachment !== "") {
       const attachmentRef = storageService
@@ -23,7 +23,7 @@ const NweetFactory = ({ userObj }) => {
     const nweetObj = {
       text: nweet,
       createdAt: Date.now(),
-      createrId: userObj.uid,
+      creatorId: userObj.uid,
       attachmentUrl,
     };
     await dbService.collection("nweets").add(nweetObj);
@@ -48,7 +48,9 @@ const NweetFactory = ({ userObj }) => {
       } = finishedEvent;
       setAttachment(result);
     };
-    reader.readAsDataURL(theFile);
+    if (Boolean(theFile)) {
+      reader.readAsDataURL(theFile);
+    }
   };
   const onClearAttachment = () => setAttachment("");
   return (
@@ -64,7 +66,7 @@ const NweetFactory = ({ userObj }) => {
         />
         <input type="submit" value="&rarr;" className="factoryInput__arrow" />
       </div>
-      <label htmlFor="attach-file" className="factoryInput__label">
+      <label for="attach-file" className="factoryInput__label">
         <span>Add photos</span>
         <FontAwesomeIcon icon={faPlus} />
       </label>
@@ -84,7 +86,6 @@ const NweetFactory = ({ userObj }) => {
             style={{
               backgroundImage: attachment,
             }}
-            alt="사진"
           />
           <div className="factoryForm__clear" onClick={onClearAttachment}>
             <span>Remove</span>

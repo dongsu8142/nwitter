@@ -1,4 +1,3 @@
-import { authService, firebaseInstance } from "fbase";
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -6,6 +5,7 @@ import {
   faGoogle,
   faGithub,
 } from "@fortawesome/free-brands-svg-icons";
+import { authService, firebaseInstance } from "fbase";
 import AuthForm from "components/AuthForm";
 
 const Auth = () => {
@@ -41,5 +41,4 @@ const Auth = () => {
     </div>
   );
 };
-
 export default Auth;

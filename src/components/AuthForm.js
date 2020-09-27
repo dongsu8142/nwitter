@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { authService } from "fbase";
 
+const inputStyles = {};
+
 const AuthForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -52,8 +54,8 @@ const AuthForm = () => {
           placeholder="Password"
           required
           value={password}
-          onChange={onChange}
           className="authInput"
+          onChange={onChange}
         />
         <input
           type="submit"

@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { dbService, storageService } from "fbase";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrash, faPencilAlt } from "@fortawesome/free-solid-svg-icons";
+import { faTrash, faPencilAlt, faEye } from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
 
 const Nweet = ({ nweetObj, isOwner }) => {
   const [editing, setEditing] = useState(false);
@@ -34,7 +35,7 @@ const Nweet = ({ nweetObj, isOwner }) => {
       {editing ? (
         <>
           <form onSubmit={onSubmit} className="container nweetEdit">
-            <input
+            <textarea
               type="text"
               placeholder="Edit your nweet"
               value={newNweet}
@@ -51,12 +52,14 @@ const Nweet = ({ nweetObj, isOwner }) => {
         </>
       ) : (
         <>
-          <h4>{nweetObj.text}</h4>
+          <h4 style={{ overflow: "hidden", textOverflow: "ellipsis" }}>
+            {nweetObj.text}
+          </h4>
           {nweetObj.attachmentUrl && (
             <img src={nweetObj.attachmentUrl} alt="사진" />
           )}
           {isOwner && (
-            <div className="nweet__actions">
+            <div className="nweet__actions2">
               <span onClick={onDeleteClick}>
                 <FontAwesomeIcon icon={faTrash} />
               </span>
@@ -65,6 +68,11 @@ const Nweet = ({ nweetObj, isOwner }) => {
               </span>
             </div>
           )}
+          <div className="nweet__actions1">
+            <Link to={`/detail/${nweetObj.id}`}>
+              <FontAwesomeIcon icon={faEye} />
+            </Link>
+          </div>
         </>
       )}
     </div>

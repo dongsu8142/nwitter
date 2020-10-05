@@ -56,13 +56,12 @@ const NweetFactory = ({ userObj }) => {
   return (
     <form onSubmit={onSubmit} className="factoryForm">
       <div className="factoryInput__container">
-        <input
+        <textarea
           className="factoryInput__input"
           value={nweet}
           onChange={onChange}
           type="text"
-          placeholder="What's on your mind?"
-          maxLength={120}
+          maxLength={900}
         />
         <input type="submit" value="&rarr;" className="factoryInput__arrow" />
       </div>
